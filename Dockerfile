@@ -8,6 +8,6 @@ COPY scripts /app/scripts
 COPY Makefile /app/
 COPY *.cpp /app/
 COPY *.h /app/
-COPY .git /app/
+COPY .git /app/.git
 
 CMD ["sh", "scripts/start.sh"]

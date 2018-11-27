@@ -27,8 +27,7 @@ ifeq  ($(UNAME_S),Darwin)
 endif
 
 
-all :   fcm
-
+#all :   fcm
 
 
 a.out : fcm.o
