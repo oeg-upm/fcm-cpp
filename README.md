@@ -3,11 +3,12 @@ Fuzzy c-Means Library
 [![Build Status](https://semaphoreci.com/api/v1/ahmad88me/fcm-cpp/branches/master/badge.svg)](https://semaphoreci.com/ahmad88me/fcm-cpp)
 [![codecov](https://codecov.io/gh/ahmad88me/fcm-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/ahmad88me/fcm-cpp)
 
+
 This project implements Fuzzy c-means from the original paper by James Bezdek. 
 
 
-## Core advantages of this implementation
-
+## Advantages of this implementation
+* It is a library that can be easily installed.
 * The use of Eign library for matrices instead of fix n-dimentional arrays which are common in prototyping fuzzy c-means library.
 * The use of dynamic sizes for matrices.
 * Make the FCM as a class, with all the related variables inside, so no need for Global variables and it also allow having multiple instances of FCM.
