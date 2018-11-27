@@ -1,0 +1,19 @@
+#library
+libfcm.so*
+a.cpp
+a.out
+
+# FCM 
+fcm
+*.o
+
+# tests and cov
+covapp
+testapp
+
+# others
+*.swp
+
+#mac 
+.DS_Store
+
