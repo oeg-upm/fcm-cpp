@@ -1,2 +1,2 @@
-export CODECOV_TOKEN="0e1b9422-d81a-41a0-8b62-4f69683c496c"
+export CODECOV_TOKEN="89ddc292-51f8-48ab-a536-a9495e889742"
 make codecov

@@ -1,5 +1,7 @@
 Fuzzy c-Means Library
 ===
+[![Build Status](https://semaphoreci.com/api/v1/ahmad88me/fcm-cpp/branches/master/badge.svg)](https://semaphoreci.com/ahmad88me/fcm-cpp)
+[![codecov](https://codecov.io/gh/ahmad88me/fcm-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/ahmad88me/fcm-cpp)
 
 This project implements Fuzzy c-means from the original paper by James Bezdek. 
 
