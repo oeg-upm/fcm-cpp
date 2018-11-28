@@ -45,8 +45,6 @@ namespace {
         fcm->set_data(data);
         fcm->set_num_clusters(4);
         fcm->update_membership();
-//        cout << "membership: \n"<< *(fcm->get_membership()) << endl;
-//        cout << "cluster center: \n"<< *(fcm->get_cluster_center()) << endl;
         delete fcm;
         EXPECT_EQ(1,1);
     }
@@ -141,7 +139,6 @@ namespace {
                     50.1, 50.3, 50.9;
         fcm->set_data(data2);
         fcm->update_membership();
-        //cout << "membership: \n"<< *(fcm->get_membership()) << endl;
         EXPECT_TRUE((*(fcm->get_membership()))(0,0) > 0.99);
         EXPECT_TRUE((*(fcm->get_membership()))(1,1) > 0.99);
         EXPECT_TRUE((*(fcm->get_membership()))(2,2) > 0.99);

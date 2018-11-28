@@ -49,22 +49,22 @@ double FCM::update_membership(){
     }
 
     if(m_membership==nullptr || m_membership->rows() == 0 || m_membership->rows() != m_data->rows()){
-        cout << "init the membership";
+        //cout << "init the membership";
         this->init_membership();
     }
     if(m_num_clusters==0){
         throw std::logic_error("ERROR: the number of clusters should be set");
     }
 
-    cout <<"mdata rows: "<< m_data->rows()<<endl;
-    cout << "mdata cols: "<<m_data->cols()<<endl;
+//    cout <<"mdata rows: "<< m_data->rows()<<endl;
+//    cout << "mdata cols: "<<m_data->cols()<<endl;
 
     for (i = 0; i < m_num_clusters; i++) {
         for (k = 0; k < m_data->rows(); k++) {
-            cout << "point: " << k << " and cluster" << i <<endl;
-            cout << "\nwill ask for the new new_uik"<< endl;
+            //cout << "point: " << k << " and cluster" << i <<endl;
+            //cout << "\nwill ask for the new new_uik"<< endl;
             new_uik = this->compute_membership_point(i, k);
-            cout << new_uik << endl;
+            //cout << new_uik << endl;
             diff = new_uik - (*m_membership)(k,i); // We need the membership inversed which is more natural for us
             if (diff > max_diff){
                 max_diff = diff;
@@ -75,42 +75,6 @@ double FCM::update_membership(){
     return max_diff;
 }
 
-
-//double FCM::update_membership(){
-//    long i, j;
-//    double new_uij;
-//    double max_diff = 0.0, diff;
-
-//    if(m_data==nullptr || m_data->rows()==0){
-//        throw std::logic_error("ERROR: data should not be empty when updating the membership");
-//    }
-
-//    if(m_membership==nullptr || m_membership->rows() == 0 || m_membership->rows() != m_data->rows()){
-//        cout << "init the membership";
-//        this->init_membership();
-//    }
-//    if(m_num_clusters==0){
-//        throw std::logic_error("ERROR: the number of clusters should be set");
-//    }
-
-//    cout <<"mdata rows: "<< m_data->rows()<<endl;
-//    cout << "mdata cols: "<<m_data->cols()<<endl;
-
-//    for (j = 0; j < m_num_clusters; j++) {
-//        for (i = 0; i < m_data->rows(); i++) {
-//            cout << i << "  ,   " << j <<endl;
-//            cout << "\nwill ask for the new new_uij"<< endl;
-//            new_uij = this->compute_membership_point(i, j);
-//            cout << new_uij << endl;
-//            diff = new_uij - (*m_membership)(i,j);
-//            if (diff > max_diff){
-//                max_diff = diff;
-//            }
-//            (*m_membership)(i,j) = new_uij;
-//        }
-//    }
-//    return max_diff;
-//}
 
 void FCM::compute_centers(){
     long i, j, k;
@@ -139,28 +103,13 @@ void FCM::compute_centers(){
     }
 }
 
-/*
-
-def distance_squared(self, x, c):
-    """
-    Compute the Euclidean distance
-    :param x: is a single point from the original data X
-    :param c: is a single point that represent a center or a cluster
-    :return: the distance
-    """
-    sum_of_sq = 0.0
-    for i in xrange(len(x)):
-        sum_of_sq += (x[i]-c[i]) ** 2
-    return sum_of_sq
-  */
-
 double FCM::get_dist(long i, long k){
   /*
    * distance which is denoted in the paper as d
    * k is the data point
    * i is the cluster center point
   */
-  cout<<"get_dist: point: "<<k<<" and cluster "<<i<<endl;
+  //cout<<"get_dist: point: "<<k<<" and cluster "<<i<<endl;
   long j;
   double sqsum = 0.0;
   if(m_num_clusters==0){
@@ -175,64 +124,12 @@ double FCM::get_dist(long i, long k){
   return sqrt(sqsum);
 }
 
-
-//double FCM::get_dist(long i, long j){
-//    /*
-//     * distance which is denoted in the paper as d
-//    */
-//    //cout<<"get_dist: "<<i<<", "<<j<<endl;
-//    long k;
-//    double sum = 0.0;
-//    if(m_num_clusters==0){
-//        throw std::logic_error("ERROR: number of clusters should not be zero\n");
-//    }
-////    cout <<"dimentions: "<<m_num_dimensions<<endl;
-//    for (k = 0; k < m_num_dimensions; k++) {
-////        cout << "getting data: "<< i << ", " << k<<endl;
-////        cout << "checking data: "<<endl;
-////        cout << "data rows: " << m_data->rows()<<endl;
-////        cout << "data cols: "<< m_data->cols()<<endl;
-////        cout << "first part: " << (*m_data)(i,k) <<endl;
-////        cout << "second part: " << (*m_cluster_center)(j,k) <<endl;
-////        cout << "pre pow: "<< (*m_data)(i,k) - (*m_cluster_center)(j,k)<<endl;
-//        sum += pow((*m_data)(i,k) - (*m_cluster_center)(j,k), 2);
-//    }
-//    //cout << "sum: " << sum << endl;
-//    return sqrt(sum);
-//    return 0;
-//}
-
-//double FCM::compute_membership_point(long i, long j){
-//    //cout  << "inside: compute_membership_point"<<endl;
-//    cout << __func__ <<"  num of cluster: "<<m_num_clusters<<endl;
-//    long k;
-//    double t, p, sum;
-//    sum = 0.0;
-//    p = 2 / (m_m - 1);
-//    if(m_num_clusters==0){
-//        throw std::logic_error("ERROR: number of clusters should not be zero\n");
-//    }
-//    for (k = 0; k < m_num_clusters; k++) {
-
-//      cout << "top: "<<this->get_dist(i, j) <<endl;
-//      cout << "bottom: "<< this->get_dist(i, k) <<endl;
-//      t = this->get_dist(i, j) / this->get_dist(i, k);
-//      if(this->get_dist(i, k)==0){
-//          t = (this->get_dist(i, j)+DBL_MIN) / (this->get_dist(i, k)+DBL_MIN);
-//      }
-//      t = pow(t, p);
-//      sum += t;
-//    }
-//    return 1.0 / sum;
-//}
-
-
 double FCM::compute_membership_point(long i, long k){
     /*
      * i the cluster
      * k is the data point
     */
-    cout << __func__ <<"  num of cluster: "<<m_num_clusters<<endl;
+    //cout << __func__ <<"  num of cluster: "<<m_num_clusters<<endl;
     long j;
     double t, seg=0.0;
     double exp = 2 / (m_m - 1);
@@ -243,21 +140,15 @@ double FCM::compute_membership_point(long i, long k){
     for (j = 0; j < m_num_clusters; j++) {
       dik = this->get_dist(i, k);
       djk = this->get_dist(j,k);
-      cout << "dik: "<<dik<<endl;
-      cout << "djk: "<<djk<<endl;
-//      if(djk==0){
-//          t = (dik) / (djk+DBL_MIN);
-//      }
-//      else{
-//        t = dik / djk;
-//      }
       if(djk==0){
           djk = DBL_MIN;
       }
       t = dik / djk;
       t = pow(t, exp);
+      //cout << "cluster: " << i << "data: " << k << " - " << "t: "<<t<<endl;
       seg += t;
     }
+    //cout << "seg: "<<seg << " u: "<<(1.0/seg)<<endl;
     return 1.0 / seg;
 }
 
@@ -266,9 +157,6 @@ void FCM::set_data(MatrixXf *data){
     if(m_data!=nullptr){
         delete m_data;
     }
-//    if(m_membership!=nullptr){
-//        delete m_membership;
-//    }
     if(data->rows()==0){
         throw std::logic_error("ERROR: seting empty data");
     }
@@ -285,7 +173,6 @@ void FCM::set_membership(MatrixXf *membership){
             throw std::logic_error("ERROR: the number of clusters is 0 and the membership matrix is empty");
         }
         else{
-//            m_num_clusters = membership->cols();
             this->set_num_clusters(membership->cols());
         }
     }
